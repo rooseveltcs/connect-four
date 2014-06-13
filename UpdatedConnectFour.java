@@ -9,13 +9,14 @@ public class UpdatedConnectFour extends MouseInputAdapter {
    
    private static JFrame frame;
    private static char[][] grid;
-   private static Graphics g;
+   //private static Graphics g;
 
 
 
    public static void main (String[] args){
       
-      super.paintComponent(g);      
+      //super.paintComponent(g);    
+       
       frame = new JFrame();
       grid = new char[SIZE_OF_GRID][SIZE_OF_GRID];
              
@@ -68,21 +69,24 @@ public class UpdatedConnectFour extends MouseInputAdapter {
    public static void display(int player){         
       JPanel north = new JPanel();
       
-      //Graphics g = north.getGraphics();
-      
       north.add(new JLabel("Player " + player + "'s Turn"));
       frame.add(north, BorderLayout.NORTH);
      
       DrawGrid panel = new DrawGrid();
+      
       panel.setBackground(Color.WHITE);
       frame.add(panel, BorderLayout.CENTER);
-      printGrid();
+            frame.setVisible(true);
+            Graphics g = north.getGraphics();
+      if(g == null)
+         throw new IllegalArgumentException("Hey! g is null!");
+      printGrid(g);
       
-      frame.setVisible(true);
+
       
    }
    
-   public static void printGrid(){
+   public static void printGrid(Graphics g){
       for(int a = grid.length -1; a >= 0; a--){
          for(int b = grid[a].length - 1; b >= 0; b--){
             if(grid[a][b] == '-'){
